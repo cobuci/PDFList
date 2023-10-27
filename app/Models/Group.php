@@ -10,12 +10,14 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = [
-         'name',
-         'description',
+        'name',
+        'description',
+        'created_at',
+        'updated_at',
     ];
 
     public function products()
     {
-         return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'group_id', 'id');
     }
 }
