@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->decimal('price_site', 10, 2)->nullable()->default(null);
             $table->string('image')->nullable()->default(null);
             $table->integer('position')->nullable()->default(null);
-            $table->foreignId('list_id')->constrained('groups');
+            $table->foreignId('group_id')->constrained('groups')->onDelete('cascade');
             $table->timestamps();
         });
     }

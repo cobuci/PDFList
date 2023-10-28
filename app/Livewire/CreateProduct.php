@@ -29,19 +29,10 @@ class CreateProduct extends Component
 
     public function dialogCreate()
     {
-        $this->dialog()->id('productDialog')->confirm([
-            'icon' => 'document-report',
-            'accept' => [
-                'label' => '',
-                'color' => 'positive',
-
-            ],
-            'reject' => [
-                'label' => 'Cancelar',
-                'color' => 'negative',
-            ],
+        $this->dialog()->id('productDialog')->show([
         ]);
     }
+
 
     public function mount($id)
     {
@@ -50,23 +41,23 @@ class CreateProduct extends Component
 
     public function createProduct()
     {
-
+        if ($this->image) {
+            $this->product['image'] = $this->image->store('products', 'public');
+        }
         $this->validate([
             'product.name' => 'required',
-            'product.description' => 'required',
             'product.code' => 'required',
             'product.min_amount' => 'required',
             'product.price_sale' => 'required',
             'product.price_site' => 'required',
         ]);
 
-        if ($this->image) {
-            $this->product['image'] = $this->image->store('products', 'public');
-        }
 
         Product::create($this->product);
 
-        $this->reset();
+
+        $this->reset('product.name', 'product.code', 'product.min_amount', 'product.price_sale', 'product.price_site', 'image');
+
         $this->notification()->success(
             $title = 'Produto criado com sucesso!',
             $description = 'O produto foi criado com sucesso!',
