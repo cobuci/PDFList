@@ -92,7 +92,7 @@
     const opt = {
         filename: 'myfile.pdf',
         image: {type: 'jpeg', quality: 1},
-        html2canvas: {scale: 1},
+        html2canvas: {scale: 4},
 
     };
     const download = () => {
