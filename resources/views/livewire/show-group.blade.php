@@ -5,20 +5,26 @@
         <div class="overflow-hidden bg-white px-6 pb-6 shadow-sm dark:bg-gray-800 sm:rounded-lg">
 
             <div class="gap-4 py-6">
-                <div class="flex justify-between">
+                <div class="flex flex-wrap justify-between">
                     <x-button primary href="{{ route('dashboard') }}" class="mb-6" icon="backspace">Voltar</x-button>
-                    <div class="flex justify-end">
-                        <x-button
-                            negative
-                            icon="trash"
-                            label="Apagar lista"
-                            x-on:confirm="{
+                    <div class="flex justify-end gap-4">
+                        <x-button label="Exportar"
+                                  green
+                                  href="{{ route('group.export',$group->id ) }}" class="mb-6"
+                                  icon="document">
+                        </x-button>
+                        <x-button label="Apagar Lista"
+                                  negative
+                                  class="mb-6"
+                                  icon="trash"
+                                  x-on:confirm="{
                                 title: 'Deletar a lista',
                                 description: 'Todos os produtos serão excluidos junto com a lista. Deseja continuar?',
                                 icon: 'warning',
                                 method: 'deleteGroup',
                              }"
-                        />
+                        >
+                        </x-button>
                     </div>
 
                 </div>
@@ -35,7 +41,8 @@
                 @if($group->products->count() > 0)
                     <div>
                         <h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">Produtos</h1>
-                        <div class="mt-6 grid w-full items-center gap-4 rounded-lg md:grid-cols-6">
+                        <div
+                            class="mt-6 grid w-full items-center gap-4 rounded-lg md:grid-cols-6">
                             <div
                                 class="flex justify-between px-4 font-bold dark:text-white md:col-span-4 md:col-start-2">
                                 <div>
@@ -49,10 +56,18 @@
                                 </div>
                             </div>
                             @foreach($group->products as $product)
-                                <div
-                                    class="border md:col-start-2 md:col-span-4 flex min-w-content min-h-fit cursor-pointer justify-between rounded-lg bg-white shadow-lg
-                         dark:bg-gray-900 dark:text-white">
-                                    <div class="flex items-center justify-center rounded-l-lg bg-red-400 max-w-24">
+                                <div x-on:confirm="{
+                                title: 'Apagar o produto da lista',
+                                description: 'O Produto será removido. Deseja continuar?',
+                                icon: 'warning',
+                                method: 'deleteProduct',
+                                params: {{ $product->id }}
+
+                             }"
+                                     class="border md:col-start-2 md:col-span-4 flex min-w-content min-h-fit cursor-pointer justify-between rounded-lg bg-white shadow-lg
+                                        dark:bg-gray-900 dark:text-white">
+                                    <div
+                                        class="flex items-center justify-center rounded-l-lg bg-red-400 max-w-24">
                                         @if($product->image)
                                             <img src="{{ asset('storage/' . $product->image) }}"
                                                  alt="{{ $product->name }}" class="h-full w-24 rounded-l-lg">
@@ -71,20 +86,20 @@
                                             <br/>
                                         </ul>
                                         <div class="flex flex-nowrap">
-                                            <span class="font-bold">VALOR DO SITE R${{ $product->price_site }}</span>
+                                                <span
+                                                    class="font-bold">VALOR DO SITE R${{ $product->price_site }}</span>
                                         </div>
                                     </div>
                                     <div class="flex flex-nowrap items-center rounded-r-lg border p-2">
                                         <span class="font-bold"> R${{ $product->price_sale }}</span>
                                     </div>
-
                                 </div>
                             @endforeach
                         </div>
                     </div>
                 @endif
-
             </div>
         </div>
     </div>
+
 </div>

@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
+        "nahidulhasan/html2pdf": "^1.4",
         "wireui/wireui": "^1.18"
     },
     "require-dev": {

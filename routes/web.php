@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use App\Livewire\ShowGroup;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/group/{id}', ShowGroup::class)->name('group.show');
+    Route::get('/group/pdf/{id}', [GroupController::class, 'exportPdfView'])->name('group.export');
 
 });
 

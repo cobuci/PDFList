@@ -18,6 +18,6 @@ class Group extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'group_id', 'id');
+        return $this->hasMany(Product::class, 'group_id', 'id')->orderBy('position', 'asc');
     }
 }
