@@ -18,6 +18,7 @@ class ShowGroup extends Component
 
     public function updateOrder($list)
     {
+    
         foreach ($list as $item) {
             Product::find($item['value'])->update(['position' => $item['order']]);
         }
