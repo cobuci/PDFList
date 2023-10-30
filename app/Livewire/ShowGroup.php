@@ -16,6 +16,7 @@ class ShowGroup extends Component
     use WithFileUploads;
 
     public $group;
+
     public array $selectedProduct = [
         'id' => '',
         'name' => 'dfgdfg',
@@ -33,8 +34,8 @@ class ShowGroup extends Component
     {
         $product = Product::find($id);
         $this->selectedProduct = $product->toArray();
-        $this->selectedProduct['price_sale'] = number_format($this->selectedProduct['price_sale'], 2, ',', '.');
-        $this->selectedProduct['price_site'] = number_format($this->selectedProduct['price_site'], 2, ',', '.');
+        $this->selectedProduct['price_sale'] = number_format($this->selectedProduct['price_sale'], 2, ',', '');
+        $this->selectedProduct['price_site'] = number_format($this->selectedProduct['price_site'], 2, ',', '');
 
 
         $this->dialog()->id('dialogEdit')->show([
@@ -57,8 +58,8 @@ class ShowGroup extends Component
         ]);
 
 
-        $this->selectedProduct['price_sale'] = str_replace(',', '.', str_replace('.', '', $this->selectedProduct['price_sale']));
-        $this->selectedProduct['price_site'] = str_replace(',', '.', str_replace('.', '', $this->selectedProduct['price_site']));
+        $this->selectedProduct['price_sale'] = str_replace(',', '.', $this->selectedProduct['price_sale']);
+        $this->selectedProduct['price_site'] = str_replace(',', '.', $this->selectedProduct['price_site']);
 
         Product::find($this->selectedProduct['id'])->update($this->selectedProduct);
 

@@ -11,19 +11,19 @@
 
 </head>
 <body>
-<div class="p-6 w-full bg-gray-800 text-white flex justify-between">
+<div class="flex w-full justify-between bg-gray-800 p-6 text-white">
     <div>
         <x-button onclick="window.location.href='{{route('group.show',$group->id ) }}'" red>Voltar</x-button>
     </div>
     <div>
-        <h1 class="font-bold text-2xl">Lista # {{ $group->id  }}</h1>
+        <h1 class="text-2xl font-bold">Lista # {{ $group->id  }}</h1>
     </div>
     <div>
         <x-button blue onclick="download()">Download</x-button>
     </div>
 </div>
 <div id="element-to-print" class="px-6 max-w-screen">
-    <div class="mt-6 flex flex-wrap min-w-fit justify-center gap-4">
+    <div class="mt-6 flex min-w-fit flex-wrap justify-center gap-4">
         <div class="w-fit border border-black p-6">
             <h1 class="text-2xl font-bold">Tabela de Preços</h1>
         </div>
@@ -47,10 +47,12 @@
                 PREÇO
             </div>
         </div>
-        @foreach($group->products as $product)
+        @foreach($group->products as $key => $product)
+
             <div
-                class="border mb-5 border-black md:col-start-2 md:col-span-4 flex min-w-fit min-h-fit cursor-pointer justify-between rounded-lg bg-white shadow-lg
-                         dark:bg-gray-900 dark:text-white">
+                class="border mb-2 border-black  md:col-span-6 flex min-w-fit cursor-pointer justify-between rounded-lg bg-white shadow-lg
+                         dark:bg-gray-900 dark:text-white {{$key == 5 || ($key > 6 && ($key - 6) % 6 === 0)?  'html2pdf__page-break' : ''  }}
+                         ">
                 <div class="flex items-center justify-center rounded-l-lg bg-red-400 max-w-24">
                     @if($product->image)
                         <img src="{{ asset('storage/' . $product->image) }}"
@@ -69,7 +71,7 @@
 
                         <br/>
                     </ul>
-                    <div class="flex ">
+                    <div class="flex">
                         <span class="font-bold">VALOR DO SITE R${{ $product->price_site }}</span>
                     </div>
                 </div>
