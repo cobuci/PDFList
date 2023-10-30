@@ -56,7 +56,7 @@ class CreateProduct extends Component
         Product::create($this->product);
 
 
-        $this->reset('product.name', 'product.code', 'product.min_amount', 'product.price_sale', 'product.price_site', 'image');
+        $this->reset('product.name', 'product.code', 'product.min_amount', 'product.price_sale', 'product.price_site', 'image', 'product.image');
 
         $this->notification()->success(
             $title = 'Produto criado com sucesso!',

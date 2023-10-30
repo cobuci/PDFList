@@ -90,7 +90,7 @@
 <script>
     const element = document.getElementById('element-to-print');
     const opt = {
-        filename: 'myfile.pdf',
+        filename: '@json($group->id)@json($group->name).pdf',
         image: {type: 'jpeg', quality: 1},
         html2canvas: {scale: 4},
 
