@@ -41,29 +41,29 @@
                 @if($group->products->count() > 0)
                     <div>
                         <h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">Produtos</h1>
+
                         <div
-                            class="mt-6 grid w-full gap-4 rounded-lg md:grid-cols-6">
-                            <div
-                                class="flex justify-between px-4 font-bold dark:text-white md:col-span-4 md:col-start-2 ">
-                                <div>
-                                    FOTO
-                                </div>
-                                <div>
-                                    REFERÊNCIA
-                                </div>
-                                <div>
-                                    PREÇO
-                                </div>
+                            class="flex mt-6 justify-between px-4 font-bold dark:text-white md:col-span-4 md:col-start-2 ">
+                            <div class="hidden md:block">
+                                FOTO
+                            </div>
+                            <div>
+                                REFERÊNCIA
+                            </div>
+                            <div>
+                                PREÇO
                             </div>
                         </div>
+
                         <div class="mt-6 gap-4 rounded-lg ">
                             <ul class="flex flex-col gap-4 w-full"
                                 wire:sortable="updateOrder"
                                 wire:sortable.options="{ animation: 100 }">
                                 @foreach($group->products as $product)
-                                    <li class="w-full my-4 justify-between"
+                                    <li class="w-full my-4 justify-between cursor-move"
                                         wire:sortable.item="{{ $product->id }}"
-                                        wire:key="task-{{ $product->id }}" wire:sortable.handle>
+                                        wire:key="task-{{ $product->id }}"
+                                        wire:sortable.handle>
                                         <div
                                             x-on:confirm="{
                                                         title: 'Apagar o produto da lista',
@@ -72,7 +72,7 @@
                                                         method: 'deleteProduct',
                                                         params: {{ $product->id }}
                                                     }"
-                                            class="border md:col-start-2 md:col-span-4 flex min-w-content min-h-fit cursor-pointer justify-between rounded-lg bg-white shadow-lg
+                                            class="border md:col-start-2 md:col-span-4 flex min-w-content min-h-fit justify-between rounded-lg bg-white shadow-lg
                                                     dark:bg-gray-900 dark:text-white">
                                             <div
                                                 class="flex items-center justify-center rounded-l-lg bg-red-400 hidden md:block max-w-24">
