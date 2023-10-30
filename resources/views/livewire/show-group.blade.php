@@ -65,13 +65,7 @@
                                         wire:key="task-{{ $product->id }}"
                                         wire:sortable.handle>
                                         <div
-                                            x-on:confirm="{
-                                                        title: 'Apagar o produto da lista',
-                                                        description: 'O Produto será removido. Deseja continuar?',
-                                                        icon: 'warning',
-                                                        method: 'deleteProduct',
-                                                        params: {{ $product->id }}
-                                                    }"
+                                            wire:click="dialogEdit({{ $product->id }})"
                                             class="border md:col-start-2 md:col-span-4 flex min-w-content min-h-fit justify-between rounded-lg bg-white shadow-lg
                                                     dark:bg-gray-900 dark:text-white">
                                             <div
@@ -112,6 +106,39 @@
 
             </div>
         </div>
+
     </div>
 
+    <x-dialog id="dialogEdit"
+              title="Editando o Produto -> {{ $selectedProduct['name'] }}">
+
+        <x-input label="Nome do Produto" placeholder="Insira o nome do produto" wire:model="selectedProduct.name"/>
+        <x-input label="Código Produto" placeholder="Insira o código do produto" wire:model="selectedProduct.code"/>
+        <x-inputs.currency label="Preço" placeholder="Insira o preço de venda" prefix="R$" thousands="." decimal=","
+                           wire:model="selectedProduct.price_sale"/>
+        <x-inputs.currency label="Preço site" placeholder="Insira o preço do site" prefix="R$"
+                           thousands="." decimal=","
+                           wire:model="selectedProduct.price_site"/>
+
+        <x-inputs.number label="Lote minimo" placeholder="Insira o lote minimo"
+                         wire:model="selectedProduct.min_amount"/>
+        <x-input type="file" accept="image/png, image/jpeg" label="Foto produto" wire:model="selectedImage"/>
+        <div>
+            @if($selectedImage)
+                <img src="{{$selectedImage->temporaryUrl() }}" alt="Imagem do produto" class="h-32 w-32">
+            @endif
+        </div>
+
+        <div class="mt-4 flex gap-4 justify-between">
+            <div>
+                <x-button negative label="Apagar" wire:click="deleteProduct({{$selectedProduct['id']}})"/>
+
+            </div>
+            <div>
+                <x-button positive label="Editar" wire:click="updateProduct"/>
+
+            </div>
+
+        </div>
+    </x-dialog>
 </div>
