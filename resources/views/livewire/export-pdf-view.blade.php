@@ -28,10 +28,10 @@
             <h1 class="text-2xl font-bold">Tabela de Preços</h1>
         </div>
         <div class="w-fit border border-black p-6">
-            <a class="font-semibold" target="_blank" href="https://www.pureshower.com.br/">WWW.PURESHOWER.COM.BR</a>
+            <a class="font-semibold" target="_blank" href="#">SITE URL</a>
         </div>
         <div class="my-auto">
-            <img src="{{ asset('images/pure-shower-logo-completo.svg') }}" class="h-10" alt="Logo"/>
+            <img src="" class="h-10" alt="Logo"/> 
         </div>
     </div>
     <div class="mt-6 grid w-full items-center gap-4 rounded-lg md:grid-cols-6">
