@@ -23,7 +23,7 @@ PDFList is a web application developed using Laravel, Livewire, and Tailwind CSS
 
 ## How to Use
 
-1. Clone the repository: `git clone https://github.com/your-username/your-project.git`
+1. Clone the repository: `git clone https://github.com/cobuci/PDFList.git`
 
 2. Install dependencies: `composer install`
 
